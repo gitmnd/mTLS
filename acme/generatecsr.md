@@ -7,4 +7,4 @@ D:\projects\mTLS\acme
 
 * The SAN in the certificate must match the hostname used in the actual connection, not the CA.
 * The SAN in the client certificate is not automatically verified by the root CA.
-* It's the server application (e.g., NGINX, Spring Boot, etc.) that decides what to check — like matching the client's SAN, CN, OU, etc. — against an allowlist, policy, or ACL.
+* It's the server application (e.g., NGINX, Spring Boot, etc.) that decides (optional) what to check — like matching the client's SAN, CN, OU, etc. — against an allowlist, policy, or ACL.
