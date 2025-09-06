@@ -1,0 +1,8 @@
+[ alt_names ]
+DNS.1 = api.acme.com
+
+[ v3_req ]
+subjectAltName = @alt_names
+keyUsage = digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth, clientAuth
+basicConstraints = CA:FALSE

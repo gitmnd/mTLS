@@ -1,0 +1,64 @@
+# OpenSSL configuration file for a local Root CA
+
+[ ca ]
+default_ca = CA_default
+
+[ CA_default ]
+dir               = .                            # Root directory
+certs             = $dir/certs                   # Where issued certs are stored
+crl_dir           = $dir/crl
+database          = $dir/index.txt               # Index of issued certs
+new_certs_dir     = $dir/newcerts                # Where new certs are stored
+serial            = $dir/serial                  # Serial number file
+crlnumber         = $dir/crlnumber               # CRL number file
+certificate       = $dir/certs/nationalbank-rootCA.crt        # Root CA cert
+private_key       = $dir/certs/nationalbank-rootCA.key      # Root CA private key
+default_md        = sha256
+policy            = policy_loose
+x509_extensions   = usr_cert
+copy_extensions   = copy                         # copy SANs from CSR
+default_days      = 825                          # Validity of issued certs
+default_crl_days  = 30
+unique_subject    = no
+
+[ policy_loose ]
+countryName             = optional
+stateOrProvinceName     = optional
+localityName            = optional
+organizationName        = optional
+organizationalUnitName  = optional
+commonName              = supplied
+emailAddress            = optional
+
+[ req ]
+default_bits        = 2048
+distinguished_name  = req_distinguished_name
+string_mask         = utf8only
+default_md          = sha256
+req_extensions      = req_ext
+
+[ req_distinguished_name ]
+countryName             = Country Name (2 letter code)
+stateOrProvinceName     = State or Province Name
+localityName            = Locality Name
+organizationName        = Organization Name
+organizationalUnitName  = Organizational Unit Name
+commonName              = Common Name
+emailAddress            = Email Address
+
+[ v3_req ]
+subjectAltName = @alt_names
+
+[ usr_cert ]
+basicConstraints = CA:FALSE
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid,issuer
+keyUsage = digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth, clientAuth
+subjectAltName = @alt_names
+
+[ v3_ca ]
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid:always,issuer
+basicConstraints = CA:true
+keyUsage = critical, digitalSignature, cRLSign, keyCertSign
